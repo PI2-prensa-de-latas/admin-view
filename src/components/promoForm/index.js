@@ -4,7 +4,7 @@ import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
 import { Link, withRouter } from 'react-router-dom';
 
-class ClientForm extends React.Component {
+class PromoForm extends React.Component {
 
     render() {
         let initialValues = {
@@ -252,4 +252,4 @@ class ClientForm extends React.Component {
     }
 }
 
-export default withRouter(ClientForm);
+export default withRouter(PromoForm);

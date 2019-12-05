@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import ClientForm from './../../components/clientForm';
+import PromoForm from '../../components/promoForm';
 import { withRouter } from 'react-router-dom';
-import req from './../../requests';
+import req from '../../requests';
 
-class newClient extends React.Component {
+class newPromo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -38,9 +38,9 @@ class newClient extends React.Component {
                         marginTop: '15px',
                     }}
                 >
-                    <h1 className='display-4'>Editar Cliente</h1>
+                    <h1 className='display-4'>Editar Promoe</h1>
                 </div>
-                <ClientForm
+                <PromoForm
                     initialValues={this.props.location.state.client}
                     onSubmit={this.submitForm}
                 />
@@ -49,4 +49,4 @@ class newClient extends React.Component {
     }
 }
 
-export default withRouter(newClient)
+export default withRouter(newPromo)

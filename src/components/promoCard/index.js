@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 import styles from './styles';
 
-class ClientCard extends React.Component {
+class PromoCard extends React.Component {
     constructor (props) {
         super(props);
         this.state = {};
@@ -67,4 +67,4 @@ class ClientCard extends React.Component {
     }
 }
 
-export default withRouter(ClientCard)
+export default withRouter(PromoCard)

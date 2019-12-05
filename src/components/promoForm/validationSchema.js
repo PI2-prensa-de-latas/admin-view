@@ -1,7 +1,7 @@
 import cpf from 'cpf';
 import * as Yup from 'yup';
 
-const ClientSchema = Yup.object().shape({
+const PromoSchema = Yup.object().shape({
     name: Yup.string()
         .matches(
             /^[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff']+( [a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff']+)*$/,
@@ -60,4 +60,4 @@ const ClientSchema = Yup.object().shape({
     )
 })
 
-export default ClientSchema;
+export default PromoSchema;

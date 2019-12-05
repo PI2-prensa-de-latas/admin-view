@@ -47,7 +47,7 @@ class LoginScreen extends React.Component {
             >
                 <div className="col-sm-8 col-11 my-auto">
                     <h1 className="bd-title">
-                        Cadastro de Cliente
+                        Cadastro de Promoção
                     </h1>
                     <div className="card">
                         <div className="card-header">

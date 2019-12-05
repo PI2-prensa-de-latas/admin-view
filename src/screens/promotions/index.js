@@ -5,19 +5,19 @@ import { withRouter, Link } from 'react-router-dom';
 import req from './../../requests';
 import { logout, getAuth } from './../../services/auth';
 import DeleteModal from '../../components/deleteModal';
-import ClientCard from './../../components/clientCard';
+import PromoCard from '../../components/promoCard';
 
-class ClientsScreen extends React.Component {
+class Promos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            clients: [],
+            promos: [],
             isModalOpen: false,
             willDelete: null,
         }
         this.openDeleteModal = this.openDeleteModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        this.deleteClient = this.deleteClient.bind(this);
+        this.deletePromo = this.deletePromo.bind(this);
         this.endSession = this.endSession.bind(this);
     }
 
@@ -34,7 +34,7 @@ class ClientsScreen extends React.Component {
         })
     }
 
-    deleteClient() {
+    deletePromo() {
         axios.delete(
             req.client,
             {
@@ -82,13 +82,13 @@ class ClientsScreen extends React.Component {
                         marginTop: '15px',
                     }}
                 >
-                    <h1 className='display-4'>Clientes Cadastrados</h1>
+                    <h1 className='display-4'>Promoções Cadastradas</h1>
                     <Link
                         className='btn btn-primary'
                         to='/new_client'
                         style={{margin: '5px'}}
                     >
-                        Novo Cliente
+                        Nova Promoção
                     </Link>
                     <button
                         type='button'
@@ -100,8 +100,8 @@ class ClientsScreen extends React.Component {
                     </button>
                 </div>
                 <div className=''>
-                    {this.state.clients.map((client, i) => 
-                        <ClientCard
+                    {this.state.promos.map((client, i) => 
+                        <PromoCard
                             key={`client ${i}`}
                             client={client}
                             openModal={this.openDeleteModal}
@@ -111,11 +111,11 @@ class ClientsScreen extends React.Component {
                 <DeleteModal
                     show={this.state.isModalOpen}
                     close={this.closeModal}
-                    delete={this.deleteClient}
+                    delete={this.deletePromo}
                 />
             </div>
         )
     }
 }
 
-export default withRouter(ClientsScreen);
+export default withRouter(Promos);

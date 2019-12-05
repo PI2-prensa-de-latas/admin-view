@@ -3,9 +3,9 @@ import React from 'react';
 import { isAuthenticated } from './services/auth';
 
 import LoginScreen from './screens/login';
-import ClientsScreen from './screens/clients';
-import NewClient from './screens/newClient';
-import EditClient from './screens/editClient';
+import PromoScreen from './screens/promotions';
+import NewPromo from './screens/newPromo';
+import EditPromo from './screens/editPromo';
 
 import {
     BrowserRouter,
@@ -31,10 +31,10 @@ const Routes = () => (
         <BrowserRouter>
             <Switch>
                 <Route exact path='/login' component={LoginScreen} />
-                <PrivateRoute exact path='/clients' component={ClientsScreen} />
-                <PrivateRoute exact path='/new_client' component={NewClient} />
-                <PrivateRoute exact path='/edit_client' component={EditClient} />
-                <Redirect from="*" to="/clients"/>
+                <Route exact path='/promos' component={PromoScreen} />
+                <Route exact path='/new_promo' component={NewPromo} />
+                <Route exact path='/edit_promo' component={EditPromo} />
+                <Redirect from="*" to="/promos"/>
             </Switch>
         </BrowserRouter>
 );
