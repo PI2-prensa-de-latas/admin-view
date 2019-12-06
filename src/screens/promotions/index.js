@@ -85,7 +85,7 @@ class Promos extends React.Component {
                     <h1 className='display-4'>Promoções Cadastradas</h1>
                     <Link
                         className='btn btn-primary'
-                        to='/new_client'
+                        to='/new_promo'
                         style={{margin: '5px'}}
                     >
                         Nova Promoção

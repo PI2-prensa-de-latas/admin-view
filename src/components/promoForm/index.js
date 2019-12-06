@@ -11,10 +11,11 @@ class PromoForm extends React.Component {
             name: '',
             email: '',
             cpf: '',
-            addresses: [],
+            machines: [],
+            canCategories: [],
         }
 
-        if(this.props.initialValues) {
+        if (this.props.initialValues) {
             initialValues = this.props.initialValues;
         }
 
@@ -22,7 +23,7 @@ class PromoForm extends React.Component {
             <Formik
                 initialValues={initialValues}
                 validationSchema={ValidationSchema}
-                onSubmit={ async (values, { setSubmitting, setErrors }) => {
+                onSubmit={async (values, { setSubmitting, setErrors }) => {
                     let success = await this.props.onSubmit(values);
                     if (success) {
                         console.log(this.props.history);
@@ -42,10 +43,10 @@ class PromoForm extends React.Component {
                                 <label htmlFor='name'>Nome</label>
                                 <Field
                                     name='name'
-                                    placeholder='Maria Silva'
+                                    placeholder='Sorteio do Prêmio!'
                                     className={`form-control ${
                                         touched.name && errors.name ? "is-invalid" : ""
-                                    }`}
+                                        }`}
                                 />
                                 <ErrorMessage
                                     component='div'
@@ -55,13 +56,14 @@ class PromoForm extends React.Component {
                             </div>
 
                             <div className='form-group'>
-                                <label htmlFor='email'>E-mail</label>
+                                <label htmlFor='description'>Descrição</label>
                                 <Field
-                                    name='email'
-                                    placeholder='maria.silva@email.com'
+                                    name='description'
+                                    as='textarea'
+                                    placeholder='Aqui você conta os detalhes da promoção'
                                     className={`form-control ${
-                                        touched.email && errors.email ? "is-invalid" : ""
-                                    }`}
+                                        touched.description && errors.description ? "is-invalid" : ""
+                                        }`}
                                 />
                                 <ErrorMessage
                                     component='div'
@@ -71,13 +73,13 @@ class PromoForm extends React.Component {
                             </div>
 
                             <div className='form-group'>
-                                <label htmlFor='cpf'>CPF</label>
+                                <label htmlFor='imgLink'>Image Link</label>
                                 <Field
-                                    name='cpf'
-                                    placeholder='12312312300'
+                                    name='imgLink'
+                                    placeholder='shorturl.at/wDEOW'
                                     className={`form-control ${
-                                        touched.cpf && errors.cpf ? "is-invalid" : ""
-                                    }`}
+                                        touched.imgLink && errors.imgLink ? "is-invalid" : ""
+                                        }`}
                                 />
                                 <ErrorMessage
                                     component='div'
@@ -85,140 +87,155 @@ class PromoForm extends React.Component {
                                     className='invalid-feedback'
                                 />
                             </div>
-                            <div className='card'>
-                                <div className='card-header'>
-                                    <span>Endereços</span>
-                                </div>
-                                <div className='card-body text-center'>
-                                    <FieldArray
-                                    name="addresses"
-                                    render={(arrayHelpers) => (
-                                        <>
-                                            {values.addresses.map((address, index) => {
+                            <div className='row'>
+                                <div className='col'>
+                                    <div className='card'>
+                                        <div className='card-header text-center'>
+                                            <span>Máquinas Participantes</span>
+                                        </div>
+                                        <div className='card-body text-center'>
+                                            <FieldArray
+                                                name="machines"
+                                                render={(arrayHelpers) => (
+                                                    <>
+                                                        {values.machines.map((address, index) => {
 
-                                                // Check if the addresses values has errors
-                                                // The usual way is not an option due to
-                                                // touched.address returning undefined when not touched
-                                                // so touched.address[index] throw an exception
-                                                var numberValid = ''
-                                                try {
-                                                    if (touched.addresses[index].number && errors.addresses[index].number) {
-                                                        numberValid = 'is-invalid';
-                                                    }
-                                                } catch { }
-
-                                                var cepValid = ''
-                                                try {
-                                                    if (touched.addresses[index].cep && errors.addresses[index].cep) {
-                                                        cepValid = 'is-invalid';
-                                                    }
-                                                } catch { }
-
-                                                return (
-                                                    <div
-                                                        key={`addess.${index}`}
-                                                        className='card text-left'
-                                                        style={{
-                                                            marginTop: '14px',
-                                                            marginBottom: '14px',
-                                                        }}
-                                                    >
-                                                        <div className='card-header'>
-                                                            <span>
-                                                                {`Endereço ${index + 1}`}
-                                                            </span>
-                                                            <button
-                                                                type='button'
-                                                                className='btn btn-danger'
-                                                                style={{
-                                                                    height: '25px',
-                                                                    padding: 0,
-                                                                    width: '25px',
-                                                                    float: 'right',
-                                                                    margin: '0 3px 0 3px',
-                                                                }}
-                                                                onClick={() => arrayHelpers.remove(index)}
-                                                            >
-                                                                <FaTrash
+                                                            return (
+                                                                <div
+                                                                    key={`machine.${index}`}
+                                                                    className='text-left'
                                                                     style={{
-                                                                        margin: '-4px -0.5px 0 0'
+                                                                        marginTop: '14px',
+                                                                        marginBottom: '14px',
                                                                     }}
-                                                                />
-                                                            </button>
-                                                        </div>
-                                                        <div className='card-body'>
-                                                            <div className='row'>
-                                                                <div className='form-group col'>
-                                                                    <label
-                                                                        htmlFor={`addresses.${index}.number`}
-                                                                    >
-                                                                        Número
-                                                                    </label>
-                                                                    <Field
-                                                                        name={`addresses.${index}.number`}
-                                                                        placeholder='23'
-                                                                        type='number'
-                                                                        className={`form-control ${numberValid}`}
-                                                                    />
-                                                                    <ErrorMessage
-                                                                        component='div'
-                                                                        name={`addresses.${index}.number`}
-                                                                        className='invalid-feedback'
-                                                                    />
-                                                                </div>
-
-                                                                <div className='form-group col'>
-                                                                    <label
-                                                                        htmlFor={`addresses.${index}.cep`}
-                                                                    >
-                                                                        CEP
-                                                                    </label>
-                                                                    <Field
-                                                                        name={`addresses.${index}.cep`}
-                                                                        placeholder='1234512'
-                                                                        className={`form-control ${cepValid}`}
-                                                                    />
-                                                                    <ErrorMessage
-                                                                        component='div'
-                                                                        name={`addresses.${index}.cep`}
-                                                                        className='invalid-feedback'
-                                                                    />
-                                                                </div>
-                                                            </div>
-
-                                                            <div className='form-group'>
-                                                                <label
-                                                                    htmlFor={`addresses.${index}.complement`}
                                                                 >
-                                                                    Complemento
-                                                                </label>
-                                                                <Field
-                                                                    name={`addresses.${index}.complement`}
-                                                                    placeholder='Bloco A, 8º andar'
-                                                                    className='form-control'
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>)
-                                            })}
-                                            <button
-                                                type='button'
-                                                className='btn btn-success'
-                                                onClick={() => arrayHelpers.push({
-                                                    number: '',
-                                                    cep: '',
-                                                    complement: '',
-                                                })}
-                                            >
-                                                Adicionar Endereço
-                                            </button>
-                                        </>
-                                    )}
-                                />
+
+                                                                    <div className=''>
+                                                                        <button
+                                                                            type='button'
+                                                                            className='btn btn-danger d-inline'
+                                                                            style={{
+                                                                                height: '25px',
+                                                                                padding: 0,
+                                                                                width: '25px',
+                                                                                float: 'left',
+                                                                                margin: '6px 10px 0px 0px',
+                                                                            }}
+                                                                            onClick={() => arrayHelpers.remove(index)}
+                                                                        >
+                                                                            <FaTrash
+                                                                                style={{
+                                                                                    margin: '-4px -0.5px 0 0'
+                                                                                }}
+                                                                            />
+                                                                        </button>    
+                                                                        
+                                                                        <div className='form-group d-flex'>
+                                                                            <Field
+                                                                                name={`addresses.${index}.number`}
+                                                                                placeholder='23'
+                                                                                as='select'
+                                                                                className={`form-control`}
+                                                                            >
+                                                                                <option value='test'>Test</option>
+                                                                            </Field>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>)
+                                                        })}
+                                                        <button
+                                                            type='button'
+                                                            className='btn btn-success'
+                                                            onClick={() => arrayHelpers.push({
+                                                                number: '',
+                                                                cep: '',
+                                                                complement: '',
+                                                            })}
+                                                        >
+                                                            Adicionar Máquina
+                                                        </button>
+                                                    </>
+                                                )}
+                                            />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className='col'>
+                                    <div className='card'>
+                                        <div className='card-header text-center'>
+                                            <span>Categorias Participantes</span>
+                                        </div>
+                                        <div className='card-body text-center'>
+                                            <FieldArray
+                                                name="canCategories"
+                                                render={(arrayHelpers) => (
+                                                    <>
+                                                        {values.canCategories.map((address, index) => {
+
+                                                            return (
+                                                                <div
+                                                                    key={`machine.${index}`}
+                                                                    className='text-left'
+                                                                    style={{
+                                                                        marginTop: '14px',
+                                                                        marginBottom: '14px',
+                                                                    }}
+                                                                >
+
+                                                                    <div className=''>
+                                                                        <button
+                                                                            type='button'
+                                                                            className='btn btn-danger d-inline'
+                                                                            style={{
+                                                                                height: '25px',
+                                                                                padding: 0,
+                                                                                width: '25px',
+                                                                                float: 'left',
+                                                                                margin: '6px 10px 0px 0px',
+                                                                            }}
+                                                                            onClick={() => arrayHelpers.remove(index)}
+                                                                        >
+                                                                            <FaTrash
+                                                                                style={{
+                                                                                    margin: '-4px -0.5px 0 0'
+                                                                                }}
+                                                                            />
+                                                                        </button>    
+                                                                        
+                                                                        <div className='form-group d-flex'>
+                                                                            <Field
+                                                                                name={`addresses.${index}.number`}
+                                                                                placeholder='23'
+                                                                                as='select'
+                                                                                className={`form-control`}
+                                                                            >
+                                                                                <option value='test'>Test</option>
+                                                                            </Field>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>)
+                                                        })}
+                                                        <button
+                                                            type='button'
+                                                            className='btn btn-success'
+                                                            onClick={() => arrayHelpers.push({
+                                                                number: '',
+                                                                cep: '',
+                                                                complement: '',
+                                                            })}
+                                                        >
+                                                            Adicionar Categoria
+                                                        </button>
+                                                    </>
+                                                )}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div style={{margin: '20px 0 30px 0'}}>
+
+                            <div style={{ margin: '20px 0 30px 0' }}>
                                 <button
                                     type='submit'
                                     className='btn btn-primary'
