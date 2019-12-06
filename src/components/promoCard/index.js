@@ -21,7 +21,7 @@ class PromoCard extends React.Component {
             >
                 <div className='card-header justify-content-between'>
                     <span style={styles.cardTitle}>
-                        Nome: {client.name}
+                        {client.name}
                     </span>
                     <button
                         type='button'
@@ -49,18 +49,6 @@ class PromoCard extends React.Component {
                             }}
                         />
                     </Link>
-                </div>
-                <div className='card-body row'>
-                    <div className='col'>
-                        <span>
-                            CPF: {client.cpf}
-                        </span>
-                    </div>
-                    <div className='col'>
-                        <span>
-                            Email: {client.email}
-                        </span>
-                    </div>
                 </div>
             </div>
         )

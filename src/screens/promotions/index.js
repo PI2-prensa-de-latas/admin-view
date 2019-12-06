@@ -54,13 +54,13 @@ class Promos extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(reqRoutes.client, {
+        axios.get(reqRoutes.promo, {
             headers: getAuth()
         })
             .then(response => {
                 console.log(response.data)
                 this.setState({
-                    clients: response.data,
+                    promos: response.data,
                 })
             })
             .catch(err => {

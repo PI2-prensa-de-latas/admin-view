@@ -26,7 +26,7 @@ class LoginScreen extends React.Component {
     }
 
     handleSubmit = async function(event) {
-        axios.post(`https://api-producao.herokuapp.com${reqRoutes.login}`, this.state)
+        axios.post(reqRoutes.login, this.state)
             .then(response => {
                 console.log(response);
                 login(response.data.token)

@@ -6,6 +6,7 @@ const style = {
     cardTitle: {
         width: 'auto',
         overflow: 'hidden',
+        fontWeight: 'bold',
     },
     button: {
         height: '25px',
