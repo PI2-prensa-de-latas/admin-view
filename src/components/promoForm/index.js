@@ -3,14 +3,17 @@ import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
 import { Link, withRouter } from 'react-router-dom';
+import DateTimePicker from './datePicker';
 
 class PromoForm extends React.Component {
 
     render() {
         let initialValues = {
             name: '',
-            email: '',
-            cpf: '',
+            description: '',
+            imgLink: '',
+            init_date: undefined,
+            end_date: undefined,
             machines: [],
             canCategories: [],
         }
@@ -24,6 +27,8 @@ class PromoForm extends React.Component {
                 initialValues={initialValues}
                 validationSchema={ValidationSchema}
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
+                    values.init_date = + new Date(values.init_date);
+                    values.end_date = + new Date(values.end_date);
                     let success = await this.props.onSubmit(values);
                     if (success) {
                         console.log(this.props.history);
@@ -36,7 +41,8 @@ class PromoForm extends React.Component {
                     values,
                     touched,
                     errors,
-                    isSubmitting
+                    isSubmitting,
+                    setFieldValue
                 }) => (
                         <Form className='container text-left'>
                             <div className='form-group'>
@@ -46,7 +52,7 @@ class PromoForm extends React.Component {
                                     placeholder='Sorteio do Prêmio!'
                                     className={`form-control ${
                                         touched.name && errors.name ? "is-invalid" : ""
-                                        }`}
+                                    }`}
                                 />
                                 <ErrorMessage
                                     component='div'
@@ -63,8 +69,8 @@ class PromoForm extends React.Component {
                                     placeholder='Aqui você conta os detalhes da promoção'
                                     className={`form-control ${
                                         touched.description && errors.description ? "is-invalid" : ""
-                                        }`}
-                                />
+                                    }`}
+                                />  
                                 <ErrorMessage
                                     component='div'
                                     name='email'
@@ -73,20 +79,51 @@ class PromoForm extends React.Component {
                             </div>
 
                             <div className='form-group'>
-                                <label htmlFor='imgLink'>Image Link</label>
+                                <label htmlFor='imgLink'>Link da Imagem</label>
                                 <Field
                                     name='imgLink'
-                                    placeholder='shorturl.at/wDEOW'
+                                    placeholder='Uma URL válida'
                                     className={`form-control ${
                                         touched.imgLink && errors.imgLink ? "is-invalid" : ""
-                                        }`}
+                                    }`}
                                 />
                                 <ErrorMessage
                                     component='div'
-                                    name='cpf'
+                                    name='imgLink'
                                     className='invalid-feedback'
                                 />
                             </div>
+
+                            <div className='form-group'>
+                                <label
+                                    htmlFor='init_date'
+                                    style={{margin: '0 10px 0 0'}}
+                                >
+                                    Data de Início da Promoção:
+                                </label>
+                                <DateTimePicker
+                                    className='form-control'
+                                    name='init_date'
+                                    value={values.init_date}
+                                    onChange={setFieldValue}
+                                />
+                            </div>
+
+                            <div className='form-group'>
+                                <label
+                                    htmlFor='end_date'
+                                    style={{margin: '0 10px 0 0'}}
+                                >
+                                    Data de Término da Promoção:
+                                </label>
+                                <DateTimePicker
+                                    className='form-control'
+                                    name='end_date'
+                                    value={values.end_date}
+                                    onChange={setFieldValue}
+                                />
+                            </div>
+
                             <div className='row'>
                                 <div className='col'>
                                     <div className='card'>

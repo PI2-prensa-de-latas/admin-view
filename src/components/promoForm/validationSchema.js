@@ -1,4 +1,3 @@
-import cpf from 'cpf';
 import * as Yup from 'yup';
 
 const PromoSchema = Yup.object().shape({
@@ -8,10 +7,8 @@ const PromoSchema = Yup.object().shape({
     description: Yup.string()
         .required("Obrigatório"),
 
-    cpf: Yup.string()
-        .url("Insira um link válido")
-        .required("Obrigatório")
-        ,
+    imgLink: Yup.string()
+        .required("Obrigatório"),
 
 })
 
