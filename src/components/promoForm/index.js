@@ -203,19 +203,18 @@ class PromoForm extends React.Component {
                                                                                     margin: '-4px -0.5px 0 0'
                                                                                 }}
                                                                             />
-                                                                        </button>    
+                                                                        </button>
                                                                         
                                                                         <div className='form-group d-flex'>
                                                                             <Field
-                                                                                name={`machines.${index}.number`}
-                                                                                placeholder='23'
+                                                                                name={`machines.${index}`}
                                                                                 as='select'
                                                                                 className={`form-control`}
                                                                             >
                                                                                 {this.state.machines.map(machine => (
                                                                                     <option
                                                                                         key={`machine${machine.id}`}
-                                                                                        value={toString(machine.id)}
+                                                                                        value={machine.id}
                                                                                     >
                                                                                         {machine.alias}
                                                                                     </option>
@@ -228,11 +227,7 @@ class PromoForm extends React.Component {
                                                         <button
                                                             type='button'
                                                             className='btn btn-success'
-                                                            onClick={() => arrayHelpers.push({
-                                                                number: '',
-                                                                cep: '',
-                                                                complement: '',
-                                                            })}
+                                                            onClick={() => arrayHelpers.push(this.state.machines[0].id)}
                                                         >
                                                             Adicionar Máquina
                                                         </button>
@@ -287,8 +282,7 @@ class PromoForm extends React.Component {
                                                                         
                                                                         <div className='form-group d-flex'>
                                                                             <Field
-                                                                                name={`addresses.${index}.number`}
-                                                                                placeholder='23'
+                                                                                name={`canCategories.${index}`}
                                                                                 as='select'
                                                                                 className={`form-control`}
                                                                             >
@@ -308,11 +302,7 @@ class PromoForm extends React.Component {
                                                         <button
                                                             type='button'
                                                             className='btn btn-success'
-                                                            onClick={() => arrayHelpers.push({
-                                                                number: '',
-                                                                cep: '',
-                                                                complement: '',
-                                                            })}
+                                                            onClick={() => arrayHelpers.push(this.state.categories[0].id)}
                                                         >
                                                             Adicionar Categoria
                                                         </button>

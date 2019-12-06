@@ -6,6 +6,7 @@ const baseURL = 'https://api-producao.herokuapp.com'; // for Dev
 
 export const reqRoutes = {
     promo: baseURL + '/promo',
+    newPromo: baseURL + '/newPromo',
     login: baseURL + '/login',
     categories: baseURL + '/canCategory',
     machines: baseURL + '/machine',

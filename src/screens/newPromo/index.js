@@ -14,7 +14,7 @@ class newPromo extends React.Component {
     submitForm = async function (values) {
         try {
             const response = await axios.post(
-                reqRoutes.client,
+                reqRoutes.newPromo,
                 values,
                 {headers: getAuth()}
             )
