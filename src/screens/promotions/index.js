@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 
-import req from './../../requests';
+import { reqRoutes } from './../../requests';
 import { logout, getAuth } from './../../services/auth';
 import DeleteModal from '../../components/deleteModal';
 import PromoCard from '../../components/promoCard';
@@ -36,7 +36,7 @@ class Promos extends React.Component {
 
     deletePromo() {
         axios.delete(
-            req.client,
+            reqRoutes.client,
             {
                 headers: {},
                 data: {
@@ -54,7 +54,7 @@ class Promos extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(req.client, {
+        axios.get(reqRoutes.client, {
             headers: getAuth()
         })
             .then(response => {

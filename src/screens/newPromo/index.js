@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PromoForm from '../../components/promoForm';
 import { withRouter } from 'react-router-dom'; 
-import req from '../../requests';
+import { reqRoutes } from '../../requests';
 import { getAuth } from '../../services/auth';
 
 class newPromo extends React.Component {
@@ -14,7 +14,7 @@ class newPromo extends React.Component {
     submitForm = async function (values) {
         try {
             const response = await axios.post(
-                req.client,
+                reqRoutes.client,
                 values,
                 {headers: getAuth()}
             )

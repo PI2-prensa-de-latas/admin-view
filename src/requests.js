@@ -1,10 +1,15 @@
-const baseURL = 'http://localhost:1337'; // for Dev
+import axios from 'axios';
+import { getAuth } from './services/auth';
+
+const baseURL = 'https://api-producao.herokuapp.com/'; // for Dev
 // const baseURL = 'some production thing';
 
-const reqRoutes = {
-    baseURL: baseURL,
-    client: baseURL + '/client',
-    login: baseURL + '/login',
+export const reqRoutes = {
+    promo: '/promo',
+    login: '/login',
 }
 
-export default reqRoutes;
+export const api = axios.create({
+    baseURL: baseURL,
+    headers: getAuth,
+})

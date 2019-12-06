@@ -6,9 +6,13 @@ export const isAuthenticated = () => {
 };
 
 export const getAuth = () => {
-    return {
-        Authorization: `Bearer ${localStorage.getItem('tolken')}`
-    };
+    if (isAuthenticated) {
+        return {
+            Authorization: `Bearer ${localStorage.getItem('tolken')}`
+        };
+    } else {
+        return {};
+    }
 }
 
 // export const isAuthenticated = () => true;

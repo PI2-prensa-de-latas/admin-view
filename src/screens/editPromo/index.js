@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PromoForm from '../../components/promoForm';
 import { withRouter } from 'react-router-dom';
-import req from '../../requests';
+import { reqRoutes } from '../../requests';
 
 class newPromo extends React.Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class newPromo extends React.Component {
         }
         try {
             const response = await axios.patch(
-                req.client,
+                reqRoutes.client,
                 allValues
             )
             console.log(response);

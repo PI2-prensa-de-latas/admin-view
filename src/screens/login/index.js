@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import req from './../../requests';
+import { api, reqRoutes } from './../../requests';
 import { withRouter } from 'react-router-dom'; 
 import { login } from './../../services/auth';
 
@@ -9,7 +9,7 @@ class LoginScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            email: "",
             password: "",
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,12 +26,20 @@ class LoginScreen extends React.Component {
     }
 
     handleSubmit = async function(event) {
-        axios.post(req.login, this.state)
+        axios.post(`https://api-producao.herokuapp.com${reqRoutes.login}`, this.state)
             .then(response => {
-                login(response.data.tolken)
-                this.props.history.push('/clients');
+                console.log(response);
+                login(response.data.token)
+                this.props.history.push('/promos');
             })
-            .catch(err => alert(err));
+            .catch(err => {
+                console.log(err);
+                alert(err)
+            });
+        // api.post(
+        //     reqRoutes.login,
+        //     this.state,
+        // )
         event.preventDefault();
     }
 
@@ -56,11 +64,11 @@ class LoginScreen extends React.Component {
                         <div className="card-body text-left">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
-                                    <label>Nome de Usuário</label>
+                                    <label>E-mail</label>
                                     <input
-                                        name="username"
+                                        name="email"
                                         className="form-control"
-                                        placeholder="Inserir nome de usuário"
+                                        placeholder="Inserir email de usuário"
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
