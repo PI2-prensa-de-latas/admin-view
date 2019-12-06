@@ -7,6 +7,8 @@ const baseURL = 'https://api-producao.herokuapp.com'; // for Dev
 export const reqRoutes = {
     promo: baseURL + '/promo',
     login: baseURL + '/login',
+    categories: baseURL + '/canCategory',
+    machines: baseURL + '/machine',
 }
 
 export const api = axios.create({

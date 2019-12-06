@@ -1,11 +1,49 @@
 import React from 'react';
+import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
 import { Link, withRouter } from 'react-router-dom';
 import DateTimePicker from './datePicker';
+import { reqRoutes } from './../../requests';
+import { getAuth } from './../../services/auth';
 
 class PromoForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            categories: [],
+            machines: [],
+        }
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            msg: 'qualquer coisa',
+        })
+
+        function getCategories() {
+            return axios.get(reqRoutes.categories, {
+                headers: getAuth()
+            })
+        }
+
+        function getMachines() {
+            return axios.get(reqRoutes.machines, {
+                headers: getAuth()
+            })
+        }
+
+        axios.all([getCategories(), getMachines()])
+            .then(axios.spread((categories, machines) => {
+                this.setState({
+                    categories: categories.data,
+                    machines: machines.data
+                })
+            }));
+    }
 
     render() {
         let initialValues = {
@@ -169,12 +207,19 @@ class PromoForm extends React.Component {
                                                                         
                                                                         <div className='form-group d-flex'>
                                                                             <Field
-                                                                                name={`addresses.${index}.number`}
+                                                                                name={`machines.${index}.number`}
                                                                                 placeholder='23'
                                                                                 as='select'
                                                                                 className={`form-control`}
                                                                             >
-                                                                                <option value='test'>Test</option>
+                                                                                {this.state.machines.map(machine => (
+                                                                                    <option
+                                                                                        key={`machine${machine.id}`}
+                                                                                        value={toString(machine.id)}
+                                                                                    >
+                                                                                        {machine.alias}
+                                                                                    </option>
+                                                                                ))}
                                                                             </Field>
                                                                         </div>
                                                                     </div>
@@ -247,7 +292,14 @@ class PromoForm extends React.Component {
                                                                                 as='select'
                                                                                 className={`form-control`}
                                                                             >
-                                                                                <option value='test'>Test</option>
+                                                                                {this.state.categories.map(category => (
+                                                                                    <option
+                                                                                        key={`cat${category.id}`}
+                                                                                        value={category.id}
+                                                                                    >
+                                                                                        {category.trademark}
+                                                                                    </option>
+                                                                                ))}
                                                                             </Field>
                                                                         </div>
                                                                     </div>
