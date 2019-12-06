@@ -10,6 +10,7 @@ export const reqRoutes = {
     login: baseURL + '/login',
     categories: baseURL + '/canCategory',
     machines: baseURL + '/machine',
+    winner: baseURL + '/getWinner',
 }
 
 export const api = axios.create({

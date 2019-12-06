@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdModeEdit } from 'react-icons/md';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaTrophy } from 'react-icons/fa';
 import { withRouter, Link } from 'react-router-dom';
 
 import styles from './styles';
@@ -49,6 +49,17 @@ class PromoCard extends React.Component {
                             }}
                         />
                     </Link>
+                    <button
+                        className='btn btn-success'
+                        style={styles.button}
+                        onClick={() => this.props.getWinner(client.id)}
+                    >
+                        <FaTrophy
+                            style={{
+                                marginTop: '-4px'
+                            }}
+                        />
+                    </button>
                 </div>
             </div>
         )
