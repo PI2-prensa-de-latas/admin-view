@@ -55,12 +55,9 @@ class Promos extends React.Component {
 
     deletePromo() {
         axios.delete(
-            reqRoutes.client,
+            `${reqRoutes.promo}/${this.state.willDelete}`,
             {
-                headers: {},
-                data: {
-                    cpf: this.state.willDelete
-                }
+                headers: getAuth()
             }
         )
             .then(response => {

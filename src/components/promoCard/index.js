@@ -23,11 +23,11 @@ class PromoCard extends React.Component {
                     <span style={styles.cardTitle}>
                         {client.name}
                     </span>
-                    {/* <button
+                    <button
                         type='button'
                         className='btn btn-danger'
                         style={styles.button}
-                        onClick={() => this.props.openModal(client.cpf)}
+                        onClick={() => this.props.openModal(client.id)}
                     >
                         <FaTrash
                             style={{
@@ -35,7 +35,7 @@ class PromoCard extends React.Component {
                             }}
                         />
                     </button>
-                    <Link
+                    {/* <Link
                         className='btn btn-primary'
                         style={styles.button}
                         to={{
