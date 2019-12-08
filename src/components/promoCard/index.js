@@ -23,7 +23,7 @@ class PromoCard extends React.Component {
                     <span style={styles.cardTitle}>
                         {client.name}
                     </span>
-                    <button
+                    {/* <button
                         type='button'
                         className='btn btn-danger'
                         style={styles.button}
@@ -48,7 +48,7 @@ class PromoCard extends React.Component {
                                 marginTop: '-4px'
                             }}
                         />
-                    </Link>
+                    </Link> */}
                     <button
                         className='btn btn-success'
                         style={styles.button}
