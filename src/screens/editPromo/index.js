@@ -3,6 +3,7 @@ import axios from 'axios';
 import PromoForm from '../../components/promoForm';
 import { withRouter } from 'react-router-dom';
 import { reqRoutes } from '../../requests';
+import { getAuth } from '../../services/auth';
 
 class newPromo extends React.Component {
     constructor(props) {
@@ -12,14 +13,15 @@ class newPromo extends React.Component {
     }
 
     submitForm = async function (values) {
-        let allValues = {
-            ...values,
-            oldCpf: this.props.location.state.client.cpf,
-        }
+        console.log(getAuth());
+        console.log(values);
         try {
             const response = await axios.patch(
-                reqRoutes.client,
-                allValues
+                `${reqRoutes.promo}/${this.props.location.state.client.id}`,
+                {
+                    headers: getAuth(),
+                    data: values,
+                }
             )
             console.log(response);
             return true;
@@ -38,7 +40,7 @@ class newPromo extends React.Component {
                         marginTop: '15px',
                     }}
                 >
-                    <h1 className='display-4'>Editar Promoe</h1>
+                    <h1 className='display-4'>Editar Promoção</h1>
                 </div>
                 <PromoForm
                     initialValues={this.props.location.state.client}

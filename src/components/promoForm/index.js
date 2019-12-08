@@ -50,14 +50,18 @@ class PromoForm extends React.Component {
             name: '',
             description: '',
             imgLink: '',
-            init_date: undefined,
-            end_date: undefined,
+            init_date: null,
+            end_date: null,
             machines: [],
             canCategories: [],
         }
 
         if (this.props.initialValues) {
-            initialValues = this.props.initialValues;
+            initialValues = { ...this.props.initialValues};
+            initialValues.init_date = new Date(this.props.initialValues.init_date * 1000);
+            initialValues.end_date = new Date(this.props.initialValues.end_date * 1000);
+            initialValues.imgLink = this.props.initialValues.imageUri;
+            initialValues.canCategories = this.props.initialValues.canCategory;
         }
 
         return (

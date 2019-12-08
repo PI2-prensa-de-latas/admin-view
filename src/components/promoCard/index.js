@@ -35,11 +35,11 @@ class PromoCard extends React.Component {
                             }}
                         />
                     </button>
-                    {/* <Link
+                    <Link
                         className='btn btn-primary'
                         style={styles.button}
                         to={{
-                            pathname: '/edit_client',
+                            pathname: '/edit_promo',
                             state: {client}
                         }}
                     >
@@ -48,7 +48,7 @@ class PromoCard extends React.Component {
                                 marginTop: '-4px'
                             }}
                         />
-                    </Link> */}
+                    </Link>
                     <button
                         className='btn btn-success'
                         style={styles.button}
